@@ -1,0 +1,156 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "TestEmployee": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/test-employee",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/custom-theme.scss",
+              "src/styles.css",
+              "src/assets/widgets/jqwidgets/styles/jqx.base.css",
+              "src/assets/widgets/jqwidgets/styles/jqx.material.css"
+            ],
+            "scripts": [
+              
+              "src/assets/widgets/scripts/jquery-1.11.1.min.js",
+              "src/assets/widgets/jqwidgets/jqxcore.js",
+              "src/assets/widgets/jqwidgets/jqxdata.js",
+              "src/assets/widgets/jqwidgets/jqxbuttons.js",
+              "src/assets/widgets/jqwidgets/jqxscrollbar.js",
+              "src/assets/widgets/jqwidgets/jqxpanel.js",
+              "src/assets/widgets/jqwidgets/jqxlistbox.js",
+              "src/assets/widgets/jqwidgets/jqxdropdownlist.js",
+              "src/assets/widgets/jqwidgets/jqxcheckbox.js",
+              "src/assets/widgets/jqwidgets/jqxtooltip.js",
+              "src/assets/widgets/jqwidgets/jqxformattedinput.js",
+              "src/assets/widgets/jqwidgets/jqxnumberinput.js",
+              "src/assets/widgets/jqwidgets/jqxcalendar.js",
+              "src/assets/widgets/jqwidgets/jqxdatetimeinput.js",
+              "src/assets/widgets/jqwidgets/jqxmenu.js",
+              "src/assets/widgets/jqwidgets/jqxgrid.js",
+              "src/assets/widgets/jqwidgets/jqxgrid.selection.js",
+              "src/assets/widgets/jqwidgets/jqxgrid.columnsresize.js",
+              "src/assets/widgets/jqwidgets/jqxgrid.sort.js",
+              "src/assets/widgets/jqwidgets/jqxgrid.filter.js",
+              "src/assets/widgets/jqwidgets/jqxgrid.pager.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2.5MB",
+                  "maximumError": "3MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.PROD.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "QA": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.QA.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "TestEmployee:build:production"
+            },
+            "development": {
+              "buildTarget": "TestEmployee:build:development"
+            },
+            "QA": {
+              "buildTarget": "TestEmployee:build:QA"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}
